@@ -11,9 +11,10 @@ st.set_page_config(page_title="Enterprise AI HR Dashboard", page_icon="🏢", la
 # 2. Cached Intelligence Core Loader
 @st.cache_resource
 def load_components():
-    model_path = os.path.join("..", "Model", "rf_model.pkl")
-    scaler_path = os.path.join("..", "Model", "scaler.pkl")
-    features_path = os.path.join("..", "Model", "features.pkl")
+    # FIX: Removed ".." so Streamlit Cloud reads directly from the root Model directory
+    model_path = os.path.join("Model", "rf_model.pkl")
+    scaler_path = os.path.join("Model", "scaler.pkl")
+    features_path = os.path.join("Model", "features.pkl")
     
     with open(model_path, 'rb') as f:
         model = pickle.load(f)
