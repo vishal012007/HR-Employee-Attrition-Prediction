@@ -11,10 +11,17 @@ st.set_page_config(page_title="Enterprise AI HR Dashboard", page_icon="🏢", la
 # 2. Cached Intelligence Core Loader
 @st.cache_resource
 def load_components():
-    # FIX: Removed ".." so Streamlit Cloud reads directly from the root Model directory
-    model_path = os.path.join("Model", "rf_model.pkl")
-    scaler_path = os.path.join("Model", "scaler.pkl")
-    features_path = os.path.join("Model", "features.pkl")
+    # Logic to handle both Localhost and Cloud paths automatically
+    if os.path.exists("Model"):
+        # Cloud/Root deployment scenario
+        base_path = "Model"
+    else:
+        # Localhost/VS Code scenario
+        base_path = os.path.join("..", "Model")
+    
+    model_path = os.path.join(base_path, "rf_model.pkl")
+    scaler_path = os.path.join(base_path, "scaler.pkl")
+    features_path = os.path.join(base_path, "features.pkl")
     
     with open(model_path, 'rb') as f:
         model = pickle.load(f)
