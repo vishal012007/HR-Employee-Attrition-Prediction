@@ -91,12 +91,26 @@ with tab1:
     overtime = st.sidebar.radio("System Logs OverTime Regularity?", ["Yes", "No"], index=1)
     business_travel = st.sidebar.selectbox("Corporate Travel Frequencies", ["Travel_Rarely", "Travel_Frequently", "Non-Travel"])
 
-    # Developer Information Section
+    # Developer Information Section (Stylish UI)
     st.sidebar.markdown("---")
-    st.sidebar.subheader("👨‍💻 Developed By")
-    st.sidebar.write("**Name:** Vishal Kashyap")
-    st.sidebar.write("**College:** United College of Engineering and Research")
-    st.sidebar.markdown("[**🔗 Connect on LinkedIn**](https://www.linkedin.com/in/vishal-kashyap-10a16b395?utm_source=share_via&utm_content=profile&utm_medium=member_android)")
+    st.sidebar.markdown("""
+    <div style="background-color: #2b2b36; padding: 15px; border-radius: 10px; border-left: 5px solid #007bff; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-bottom: 20px;">
+        <h4 style="color: #ffffff; margin-top: 0px; margin-bottom: 10px;">👨‍💻 Developed By</h4>
+        <div style="color: #e0e0e0; font-size: 14px; margin-bottom: 8px;">
+            <strong>👤 Name:</strong><br>
+            <span style="color: #00a8ff; font-weight: 900; font-size: 18px; letter-spacing: 1px;">VISHAL KASHYAP</span>
+        </div>
+        <div style="color: #e0e0e0; font-size: 13px; margin-bottom: 15px;">
+            <strong>🎓 College:</strong><br>
+            <i>United College of Engineering and Research</i>
+        </div>
+        <a href="https://www.linkedin.com/in/vishal-kashyap-10a16b395?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" style="text-decoration: none;">
+            <div style="background-color: #0077b5; color: white; text-align: center; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 14px;">
+                🔗 Connect on LinkedIn
+            </div>
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
 
     if st.sidebar.button("🔮 RUN PREDICTIVE CORRELATION", use_container_width=True):
         # Matching exactly the 9 inputs trained in model_training.py
