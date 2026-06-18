@@ -6,20 +6,20 @@ from sklearn.ensemble import RandomForestClassifier
 
 print("🚀 Starting Model Training Process...")
 
-# 1. Dataset ko load karna
-# '../' ka matlab hai model folder se ek step bahar aao aur Dataset folder mein jao
+# 1. Load the dataset
+# '../' navigates one directory up from the model folder into the Dataset folder
 try:
     df = pd.read_csv('../Dataset/WA_Fn-UseC_-HR-Employee-Attrition.csv')
     print("✅ Dataset loaded successfully!")
 except FileNotFoundError:
-    print("❌ Error: Dataset file nahi mili. Folder ka naam check karo.")
+    print("❌ Error: Dataset file not found. Please check the directory path and folder name.")
     exit()
 
 # 2. Data Preprocessing
-# Target variable ko 0 aur 1 mein badalna
+# Convert the target variable to binary (1 for 'Yes', 0 for 'No')
 df['Attrition'] = df['Attrition'].apply(lambda x: 1 if x == 'Yes' else 0)
 
-# Main columns jo dashboard mein use hue hain
+# Main columns used in the Streamlit dashboard
 selected_columns = [
     'Age', 'MonthlyIncome', 'NumCompaniesWorked', 
     'YearsAtCompany', 'YearsSinceLastPromotion', 
@@ -30,24 +30,24 @@ selected_columns = [
 X = df[selected_columns]
 y = df['Attrition']
 
-# Text wale data ko numbers mein badalna
+# Convert categorical text data into numerical values using One-Hot Encoding
 X_encoded = pd.get_dummies(X, drop_first=True)
 
-# 3. features.pkl ko save karna
+# 3. Save the features.pkl file
 feature_cols = X_encoded.columns.tolist()
 pickle.dump(feature_cols, open('features.pkl', 'wb'))
 print("✅ features.pkl saved successfully!")
 
-# 4. Data ko split karna (80% training, 20% testing)
+# 4. Split the data (80% for training, 20% for testing)
 X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.2, random_state=42)
 
-# 5. scaler.pkl ko save karna (Data Balancing)
+# 5. Scale the features and save the scaler.pkl file
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 pickle.dump(scaler, open('scaler.pkl', 'wb'))
 print("✅ scaler.pkl saved successfully!")
 
-# 6. Random Forest Model train karna aur rf_model.pkl save karna
+# 6. Train the Random Forest Model and save the rf_model.pkl file
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X_train_scaled, y_train)
 pickle.dump(model, open('rf_model.pkl', 'wb'))
