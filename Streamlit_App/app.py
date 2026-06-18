@@ -91,6 +91,13 @@ with tab1:
     overtime = st.sidebar.radio("System Logs OverTime Regularity?", ["Yes", "No"], index=1)
     business_travel = st.sidebar.selectbox("Corporate Travel Frequencies", ["Travel_Rarely", "Travel_Frequently", "Non-Travel"])
 
+    # Developer Information Section
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("👨‍💻 Developed By")
+    st.sidebar.write("**Name:** Vishal Kashyap")
+    st.sidebar.write("**College:** United College of Engineering and Research")
+    st.sidebar.markdown("[**🔗 Connect on LinkedIn**](https://www.linkedin.com/in/vishal-kashyap-10a16b395?utm_source=share_via&utm_content=profile&utm_medium=member_android)")
+
     if st.sidebar.button("🔮 RUN PREDICTIVE CORRELATION", use_container_width=True):
         # Matching exactly the 9 inputs trained in model_training.py
         input_dict = {
